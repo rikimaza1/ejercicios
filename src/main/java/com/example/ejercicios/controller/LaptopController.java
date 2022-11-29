@@ -64,7 +64,7 @@ public class LaptopController {
      *
      * @param laptop actualiza una laptop existente en la base de datos
      */
-    @PutMapping("/api/books")
+    @PutMapping("/api/laptops")
     @ApiOperation("Actualiza una registro en la base de datos")
     public ResponseEntity<Laptop> update(@RequestBody Laptop laptop) {
         if (laptop.getId() == null) { // si no tiene id quiere decir que sí es una creación
@@ -87,7 +87,7 @@ public class LaptopController {
      * @param id elimina una laptop por id
      */
     //@ApiIgnore
-    @DeleteMapping("/api/books/{id}")
+    @DeleteMapping("/api/laptops/{id}")
     @ApiOperation("Elimina un registro por id")
     public ResponseEntity<Laptop> delete(@PathVariable Long id) {
 
@@ -106,7 +106,7 @@ public class LaptopController {
      * elimina todos los registros de la base de datos
      */
     // @ApiIgnore // ignorar este método para que no aparezca en la documentación de la api Swagger
-    @DeleteMapping("/api/books")
+    @DeleteMapping("/api/laptops")
     @ApiOperation("Elimina todos los registros")
     public ResponseEntity<Laptop> deleteAll() {
         //log.info("REST Request for delete all laptops");
