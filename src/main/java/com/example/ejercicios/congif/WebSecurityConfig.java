@@ -2,6 +2,7 @@ package com.example.ejercicios.congif;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,8 +20,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/hello").hasRole("USER")
-                .antMatchers("/bootstrap").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/api/hello").hasRole("USER")
+                .antMatchers(HttpMethod.GET,"/api/laptops").hasRole("USER")
+                .antMatchers(HttpMethod.GET,"/api/laptops/{id}").hasRole("USER")
+                .antMatchers(HttpMethod.POST,"/api/laptop").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT,"api/laptops").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/api/laptops/{id}").hasRole("ADMIN")
+                .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
